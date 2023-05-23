@@ -16,43 +16,43 @@ buildscript{
 }
 
 plugins {
-    id 'java'
-    id 'java-library'  // need this for "api" dependencies
-    id 'maven-publish'
+  id 'java'
+  id 'java-library'  // need this for "api" dependencies
+  id 'maven-publish'
 }
 
 group 'com.particle.life'
 version '1.0.0'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    api 'org.joml:joml:1.10.1'  // is exposed, e.g. by com.particle_life.Accelerator
+  api 'org.joml:joml:1.10.1'  // is exposed, e.g. by com.particle_life.Accelerator
 }
 
 publishing {
-    publications {
-        particleLife(MavenPublication) {
-            artifactId 'particle-life'
-            from components.java
-        }
+  publications {
+    particleLife(MavenPublication) {
+      artifactId 'particle-life'
+      from components.java
     }
+  }
 }
 
 apply plugin: "com.diffplug.spotless"
 
 spotless {
-    lineEndings 'UNIX'
+  lineEndings 'UNIX'
 
-    java {
-        target '**/*.java'
-        removeUnusedImports()
-        eclipse().configFile new File(rootProject.projectDir.absolutePath, 'doc/eclipse.formatter.xml')
-    }
-    groovyGradle {
-        target '*.gradle'
-        greclipse().configFile new File(rootProject.projectDir.absolutePath, 'doc/eclipse.formatter.xml')
-    }
+  java {
+    target '**/*.java'
+    removeUnusedImports()
+    eclipse().configFile new File(rootProject.projectDir.absolutePath, 'doc/eclipse.formatter.xml')
+  }
+  groovyGradle {
+    target '*.gradle'
+    greclipse().configFile new File(rootProject.projectDir.absolutePath, 'doc/eclipse.formatter.xml')
+  }
 }
