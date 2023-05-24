@@ -2,7 +2,7 @@
 
 这个版本是pama1234的魔改版（（（
 
-[中文](#java仿生粒子系统) | [English](#🦠 Particle Life Framework)
+[中文](#java仿生粒子系统) | [English](#particle-life-framework)
 
 ## JAVA仿生粒子系统
 
@@ -16,7 +16,7 @@
 
 请参见[文档](https://particle-life.com/framework)。
 
-## 🦠 Particle Life Framework
+## Particle Life Framework
 
 A Java framework that can simulate a variety of particle systems. It uses space partitioning and parallelization to achieve a significant speedup.
 

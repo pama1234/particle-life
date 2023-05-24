@@ -21,7 +21,7 @@ plugins {
   id 'maven-publish'
 }
 
-sourceCompatibility = 17
+sourceCompatibility = 16
 compileJava {
   options.incremental = true
   options.encoding = 'UTF-8'
