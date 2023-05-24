@@ -21,6 +21,12 @@ plugins {
   id 'maven-publish'
 }
 
+sourceCompatibility = 17
+compileJava {
+  options.incremental = true
+  options.encoding = 'UTF-8'
+}
+
 group 'com.particle.life'
 version '1.0.0'
 
