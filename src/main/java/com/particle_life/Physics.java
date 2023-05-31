@@ -17,7 +17,7 @@ public class Physics{
   // container layout:
   private int nx;
   private int ny;
-  private double containerSize=0.13;//todo: implement makeContainerNeighborhood() to make this independent of rmax
+  private float containerSize=0.13f;//todo: implement makeContainerNeighborhood() to make this independent of rmax
   public Accelerator accelerator;
   public MatrixGenerator matrixGenerator;
   public PositionSetter positionSetter;
@@ -350,7 +350,7 @@ public class Physics{
         if(i==j) continue;
         Particle q=particles[j];
         Vector3f relativePosition=connection(p.position,q.position);
-        double distanceSquared=relativePosition.lengthSquared();
+        float distanceSquared=relativePosition.lengthSquared();
         // only check particles that are closer than or at rmax
         if(distanceSquared!=0&&distanceSquared<=settings.rmax*settings.rmax) {
           relativePosition.div(settings.rmax);
@@ -382,7 +382,7 @@ public class Physics{
    * 
    * @return shortest possible distance between two points
    */
-  public double distance(Vector3f pos1,Vector3f pos2) {
+  public float distance(Vector3f pos1,Vector3f pos2) {
     return connection(pos1,pos2).length();
   }
   /**

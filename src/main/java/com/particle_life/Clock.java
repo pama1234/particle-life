@@ -4,20 +4,20 @@ import java.util.Arrays;
 
 public class Clock{
   private long inTime=-1;
-  private final double[] lastTimes;
+  private final float[] lastTimes;
   private int currentTimeIndex=-1;
-  private double dt=0.0;
+  private float dt=0.0f;
   /**
    * Average passed time over the last <code>n</code> times {@link #tick()} or {@link #in()} /
    * {@link #out()} was called.
    */
-  private double avgDt=0;
-  private double dtVariance=0;
+  private float avgDt=0;
+  private float dtVariance=0;
   /**
    * @param n over how many values should the average be calculated? (default is 20)
    */
   public Clock(int n) {
-    lastTimes=new double[n];
+    lastTimes=new float[n];
     Arrays.fill(lastTimes,0);
   }
   /**
@@ -41,7 +41,7 @@ public class Clock{
       // must call in() before out()
       throw new RuntimeException("Clock.out() was called even though Clock.in() was never called before");
     }
-    dt=(System.nanoTime()-inTime)/1000000.0;
+    dt=(System.nanoTime()-inTime)/1000000.0f;
     final int n=lastTimes.length; // for convenience
     // step to next index in array
     currentTimeIndex++;
@@ -55,9 +55,9 @@ public class Clock{
       avgDt=lastTimes[0];
       dtVariance=0;
     }else {
-      double sum=0;
-      double squareSum=0;
-      for(double t:lastTimes) {
+      float sum=0;
+      float squareSum=0;
+      for(float t:lastTimes) {
         sum+=t;
         squareSum+=t*t;
       }
@@ -68,21 +68,21 @@ public class Clock{
   /**
    * @return average passed time in milliseconds.
    */
-  public double getAvgDtMillis() {
+  public float getAvgDtMillis() {
     return avgDt;
   }
-  public double getAvgFramerate() {
-    if(avgDt==0) return 0.0;
-    return 1000.0/avgDt;
+  public float getAvgFramerate() {
+    if(avgDt==0) return 0.0f;
+    return 1000.0f/avgDt;
   }
-  public double getStandardDeviation() {
-    return Math.sqrt(dtVariance);
+  public float getStandardDeviation() {
+    return (float)Math.sqrt(dtVariance);
   }
-  public double getDtMillis() {
+  public float getDtMillis() {
     return dt;
   }
-  public double getFramerate() {
-    if(dt==0) return 0.0;
-    return 1000.0/lastTimes[currentTimeIndex];
+  public float getFramerate() {
+    if(dt==0) return 0.0f;
+    return 1000.0f/lastTimes[currentTimeIndex];
   }
 }

@@ -34,7 +34,7 @@ public class Loop{
    * <p>
    * This won't have any effect on the actual framerate returned by {@link #getActualDt()}.
    */
-  public double maxDt=1.0/20.0; // min. 20 fps
+  public float maxDt=1.0f/20.0f; // min. 20 fps
   /**
    * If this is <code>true</code>, the callback won't be called in the loop.
    */
@@ -56,7 +56,7 @@ public class Loop{
      *
      * @param dt The time passed in the iteration of the loop, limited by {@link #maxDt}.
      */
-    void call(double dt);
+    void call(float dt);
   }
   /**
    * The passed command will be added to the queue and will be processed in the next iteration of
@@ -126,8 +126,8 @@ public class Loop{
     loopThread=null;
     return true;
   }
-  private double computeDt() {
-    double dt=clock.getDtMillis()/1000.0;
+  private float computeDt() {
+    float dt=clock.getDtMillis()/1000.0f;
     return Math.min(maxDt,dt);
   }
   /**
@@ -138,8 +138,8 @@ public class Loop{
    * 
    * @return how much time passed between the last two iterations of the loop, in seconds.
    */
-  public double getActualDt() {
-    return clock.getDtMillis()/1000.0;
+  public float getActualDt() {
+    return clock.getDtMillis()/1000.0f;
   }
   /**
    * Average framerate over the last couple of frames. Unlike the value given to the callback in
@@ -150,7 +150,7 @@ public class Loop{
    * @return average framerate in frames per second.
    * @see #getActualDt()
    */
-  public double getAvgFramerate() {
+  public float getAvgFramerate() {
     return clock.getAvgFramerate();
   }
 }

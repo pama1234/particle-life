@@ -33,7 +33,7 @@ public class LoadDistributor{
   public void distributeLoadEvenly(int loadSize,int preferredNumberOfThreads,IndexProcessor indexProcessor) {
     if(loadSize<=0) return;
     LinkedList<Future<?>> futures=new LinkedList<>(); // needed later for waiting for all threads to finish
-    int length=(int)Math.ceil(loadSize/(double)preferredNumberOfThreads);
+    int length=(int)Math.ceil(loadSize/(float)preferredNumberOfThreads);
     int start=0;
     int stop=start+length;
     while(stop<=loadSize) {
