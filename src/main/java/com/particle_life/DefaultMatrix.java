@@ -1,5 +1,7 @@
 package com.particle_life;
 
+import pama1234.math.UtilMath;
+
 public class DefaultMatrix implements Matrix{
   public final int size;
   public final float[][] values;
@@ -21,7 +23,7 @@ public class DefaultMatrix implements Matrix{
   public void randomize() {
     for(int i=0;i<size;i++) {
       for(int j=0;j<size;j++) {
-        values[i][j]=(float)(2*Math.random()-1);
+        values[i][j]=2*UtilMath.random()-1;
       }
     }
   }

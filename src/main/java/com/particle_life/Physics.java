@@ -1,10 +1,12 @@
 package com.particle_life;
 
-import org.joml.Vector3f;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.joml.Vector3f;
+
+import pama1234.math.UtilMath;
 
 public class Physics{
   private static final int DEFAULT_MATRIX_SIZE=7;
@@ -63,8 +65,8 @@ public class Physics{
     //        nx = (int) Math.ceil(2 * range.range.x / containerSize);
     //        ny = (int) Math.ceil(2 * range.range.y / containerSize);
     // currently, "floor" is needed (because containerSize = rmax), so that rmax lies inside "simple" neighborhood
-    nx=(int)Math.floor(2/containerSize);
-    ny=(int)Math.floor(2/containerSize);
+    nx=UtilMath.floor(2/containerSize);
+    ny=UtilMath.floor(2/containerSize);
   }
   private void makeContainerNeighborhood() {
     containerNeighborhood=new int[][] {
@@ -324,14 +326,14 @@ public class Physics{
   private float computeFrictionFactor(float halfLife,float dt) {
     if(halfLife==0) return 0; // avoid division by zero
     if(halfLife==Float.POSITIVE_INFINITY) return 1f;
-    return (float)Math.pow(0.5f,dt/halfLife);
+    return UtilMath.pow(0.5f,dt/halfLife);
   }
   private void updateVelocity(int i) {
     Particle p=particles[i];
     // apply friction before adding new velocity
     p.velocity.mul(computeFrictionFactor(settings.velocityHalfLife,settings.dt));
-    int cx0=(int)Math.floor((p.position.x+1)/containerSize);
-    int cy0=(int)Math.floor((p.position.y+1)/containerSize);
+    int cx0=UtilMath.floor((p.position.x+1)/containerSize);
+    int cy0=UtilMath.floor((p.position.y+1)/containerSize);
     for(int[] containerNeighbor:containerNeighborhood) {
       int cx=wrapContainerX(cx0+containerNeighbor[0]);
       int cy=wrapContainerY(cy0+containerNeighbor[1]);

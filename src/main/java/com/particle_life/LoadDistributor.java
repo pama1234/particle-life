@@ -1,7 +1,13 @@
 package com.particle_life;
 
 import java.util.LinkedList;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import pama1234.math.UtilMath;
 
 public class LoadDistributor{
   private final ExecutorService threadPool=Executors.newCachedThreadPool();
@@ -33,7 +39,7 @@ public class LoadDistributor{
   public void distributeLoadEvenly(int loadSize,int preferredNumberOfThreads,IndexProcessor indexProcessor) {
     if(loadSize<=0) return;
     LinkedList<Future<?>> futures=new LinkedList<>(); // needed later for waiting for all threads to finish
-    int length=(int)Math.ceil(loadSize/(float)preferredNumberOfThreads);
+    int length=UtilMath.ceil(loadSize/(float)preferredNumberOfThreads);
     int start=0;
     int stop=start+length;
     while(stop<=loadSize) {

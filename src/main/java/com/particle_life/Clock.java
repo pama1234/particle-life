@@ -2,6 +2,8 @@ package com.particle_life;
 
 import java.util.Arrays;
 
+import pama1234.math.UtilMath;
+
 public class Clock{
   private long inTime=-1;
   private final float[] lastTimes;
@@ -76,7 +78,7 @@ public class Clock{
     return 1000.0f/avgDt;
   }
   public float getStandardDeviation() {
-    return (float)Math.sqrt(dtVariance);
+    return UtilMath.sqrt(dtVariance);
   }
   public float getDtMillis() {
     return dt;
