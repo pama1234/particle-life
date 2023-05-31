@@ -2,12 +2,12 @@ package com.particle_life;
 
 public class DefaultMatrix implements Matrix{
   public final int size;
-  public final double[][] values;
+  public final float[][] values;
   public DefaultMatrix(int size) {
     this.size=size;
-    values=new double[size][];
+    values=new float[size][];
     for(int i=0;i<size;i++) {
-      values[i]=new double[size];
+      values[i]=new float[size];
     }
     zero();
   }
@@ -21,7 +21,7 @@ public class DefaultMatrix implements Matrix{
   public void randomize() {
     for(int i=0;i<size;i++) {
       for(int j=0;j<size;j++) {
-        values[i][j]=2*Math.random()-1;
+        values[i][j]=(float)(2*Math.random()-1);
       }
     }
   }
@@ -30,11 +30,11 @@ public class DefaultMatrix implements Matrix{
     return size;
   }
   @Override
-  public double get(int i,int j) {
+  public float get(int i,int j) {
     return values[i][j];
   }
   @Override
-  public void set(int i,int j,double value) {
+  public void set(int i,int j,float value) {
     values[i][j]=value;
   }
   @Override

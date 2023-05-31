@@ -1,6 +1,6 @@
 package com.particle_life;
 
-import org.joml.Vector3d;
+import org.joml.Vector3f;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -243,7 +243,7 @@ public class Physics{
     p.velocity.z=0;
   }
   protected final void setType(Particle p) {
-    p.type=typeSetter.getType(new Vector3d(p.position),new Vector3d(p.velocity),p.type,settings.matrix.size());
+    p.type=typeSetter.getType(new Vector3f(p.position),new Vector3f(p.velocity),p.type,settings.matrix.size());
   }
   private void makeContainers() {
     // ensure that nx and ny are still OK
@@ -291,7 +291,7 @@ public class Physics{
    * @param position must be in position range
    * @return index of the container containing <code>position</code>
    */
-  private int getContainerIndex(Vector3d position) {
+  private int getContainerIndex(Vector3f position) {
     int cx=(int)((position.x+1)/containerSize);
     int cy=(int)((position.y+1)/containerSize);
     // for solid borders
@@ -321,10 +321,10 @@ public class Physics{
       return cy;
     }
   }
-  private double computeFrictionFactor(double halfLife,double dt) {
-    if(halfLife==0) return 0.0; // avoid division by zero
-    if(halfLife==Double.POSITIVE_INFINITY) return 1.0;
-    return Math.pow(0.5,dt/halfLife);
+  private float computeFrictionFactor(float halfLife,float dt) {
+    if(halfLife==0) return 0; // avoid division by zero
+    if(halfLife==Float.POSITIVE_INFINITY) return 1f;
+    return (float)Math.pow(0.5f,dt/halfLife);
   }
   private void updateVelocity(int i) {
     Particle p=particles[i];
@@ -349,12 +349,12 @@ public class Physics{
       for(int j=start;j<stop;j++) {
         if(i==j) continue;
         Particle q=particles[j];
-        Vector3d relativePosition=connection(p.position,q.position);
+        Vector3f relativePosition=connection(p.position,q.position);
         double distanceSquared=relativePosition.lengthSquared();
         // only check particles that are closer than or at rmax
         if(distanceSquared!=0&&distanceSquared<=settings.rmax*settings.rmax) {
           relativePosition.div(settings.rmax);
-          Vector3d deltaV=accelerator.accelerate(settings.matrix.get(p.type,q.type),relativePosition);
+          Vector3f deltaV=accelerator.accelerate(settings.matrix.get(p.type,q.type),relativePosition);
           // apply force as acceleration
           p.velocity.add(deltaV.mul(settings.rmax*settings.force*settings.dt));
         }
@@ -367,8 +367,8 @@ public class Physics{
     p.velocity.mulAdd(settings.dt,p.position,p.position);
     ensurePosition(p.position);
   }
-  public Vector3d connection(Vector3d pos1,Vector3d pos2) {
-    Vector3d delta=new Vector3d(pos2).sub(pos1);
+  public Vector3f connection(Vector3f pos1,Vector3f pos2) {
+    Vector3f delta=new Vector3f(pos2).sub(pos1);
     if(settings.wrap) {
       // wrapping the connection gives us the shortest possible distance
       Range.wrap(delta);
@@ -382,7 +382,7 @@ public class Physics{
    * 
    * @return shortest possible distance between two points
    */
-  public double distance(Vector3d pos1,Vector3d pos2) {
+  public double distance(Vector3f pos1,Vector3f pos2) {
     return connection(pos1,pos2).length();
   }
   /**
@@ -400,7 +400,7 @@ public class Physics{
    * 
    * @param position
    */
-  public void ensurePosition(Vector3d position) {
+  public void ensurePosition(Vector3f position) {
     if(settings.wrap) {
       Range.wrap(position);
     }else {

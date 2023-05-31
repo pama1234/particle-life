@@ -1,6 +1,6 @@
 package com.particle_life;
 
-import org.joml.Vector3d;
+import org.joml.Vector3f;
 
 public interface Accelerator{
   /**
@@ -15,5 +15,5 @@ public interface Accelerator{
    *         interpreted as relative to rmax, that is, it will be scaled by rmax before it is
    *         applied to the particle.
    */
-  Vector3d accelerate(double a,Vector3d pos);
+  Vector3f accelerate(float a,Vector3f pos);
 }

@@ -8,22 +8,22 @@ public class PhysicsSettings{
   /**
    * no interaction between particles that are further apart than rmax
    */
-  public double rmax=0.04;
+  public float rmax=0.04f;
   /**
    * The time in seconds after which half the velocity of a particle should be lost due to
    * friction. The actual friction factor <code>f</code> that the velocity is multiplied with in
    * every time step is calculated on the basis of this value according to the following formula:
    * <code>f = Math.pow(0.5, dt / frictionHalfLife)</code>
    */
-  public double velocityHalfLife=0.043;
+  public float velocityHalfLife=0.043f;
   /**
    * Scaled force by an arbitrary factor.
    */
-  public double force=1.0f;
+  public float force=1.0f;
   /**
    * Time that is assumed to have passed between each simulation step, in seconds.
    */
-  public double dt=0.02f;
+  public float dt=0.02f;
   public Matrix matrix=new DefaultMatrix(6);
   public PhysicsSettings() {}
   public PhysicsSettings deepCopy() {
