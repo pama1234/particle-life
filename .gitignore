@@ -1,7 +1,22 @@
+## idea:
 .idea
 .gradle/
 out/
 build/
 
+## vscode:
 .vscode/
 bin/
+
+## eclipse:
+.classpath
+.project
+.metadata/
+*.tmp
+*.bak
+*.swp
+*~.nib
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
