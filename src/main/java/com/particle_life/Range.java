@@ -2,6 +2,8 @@ package com.particle_life;
 
 import org.joml.Vector3f;
 
+import pama1234.math.UtilMath;
+
 /**
  * Provides functions for assuring that the coordinates of particles are in [-1, 1].
  * <p>
@@ -45,20 +47,12 @@ class Range{
     x.z=0; //todo 3D
   }
   public static void clamp(Vector3f x) {
-    x.x=clamp(x.x);
-    x.y=clamp(x.y);
+    x.x=UtilMath.clamp(x.x);
+    x.y=UtilMath.clamp(x.y);
     x.z=0; // todo 3D
   }
   private static float wrap(float value) {
     return modulo(value+1,2)-1;
-  }
-  private static float clamp(float val) {
-    if(val<-1) {
-      return -1;
-    }else if(val>1) {
-      return 1;
-    }
-    return val;
   }
   /**
    * Fast implementation of the floored modulo operation. Only works for positive <code>b</code>,
